@@ -1,10 +1,13 @@
-<p style="color: green"><%= notice %></p>
-
 <%= render @client %>
-
 <div>
   <%= link_to "Edit this client", edit_client_path(@client) %> |
-  <%= link_to "Back to clients", clients_path %>
-
-  <%= button_to "Destroy this client", @client, method: :delete %>
+  <%= link_to "Back to clients", clients_path %> |
+  <%= link_to "Destroy this client", @client, method: :delete %>
 </div>
+<hr/>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#"><%= link_to @client.name, @client %></a></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "Rooms", client_rooms_path(@client) %></li>
+  </ol>
+</nav>

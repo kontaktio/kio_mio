@@ -31,8 +31,6 @@ class KioClient < Thor
         end
     end
 
-
-
     protected
     def write_content(url, filename)
         puts "Getting content from #{url}"

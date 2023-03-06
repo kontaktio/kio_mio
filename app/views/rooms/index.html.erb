@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <h1>Rooms</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Client</th>
+        <th>Room #</th>
+        <th>Name</th>
+        <th>Floor name</th>
+        <th>Building name</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @rooms.each do |room| %>
+        <tr>
+          <td><%= link_to room.client.name, room.client %></td>
+          <td><%= room.room_id %></td>
+          <td><%= room.name %></td>
+          <td><%= room.floor_name %></td>
+          <td><%= room.building_name %></td>
+          <td><%= link_to 'Show', room %></td>
+          <td><%= link_to 'Edit', edit_room_path(room) %></td>
+          <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'New Room', new_room_path, class: "btn btn-primary" %>
+</div>
