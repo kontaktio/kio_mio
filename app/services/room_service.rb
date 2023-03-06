@@ -5,26 +5,29 @@ require 'json'
 require 'csv'
 
 class RoomService
-  def get_rooms(client, parent)
+  def get_rooms(client)
     bs = BaseService.new
       url = "http://apps.cloud.us.kontakt.io/v2/locations/rooms"
 
       while !url.nil?
-          url = bs.write_content(url, client)
+          url = bs.get_content(url, client, self)
       end
   end
 
   def write_output(json, client)
     room_count = 0
     json["content"].each do |room|
+      # binding.break
 
-      Room.create(client_id: client.id,
-                  room_id: room["id"],
+      r = Room.create(client_id: client.id,
+                  kio_room_id: room["id"],
                   name: room["name"],
-                  floor_name: room["floor"]["name"],
-                  building_name: room["floor"]["building"]["name"])
+                  kio_floor_id: room["floor"]["id"],
+                  kio_building_id: room["floor"]["building"]["id"])
 
-        room_count += 1
+      BaseService.check(r)
+
+      room_count += 1
     end
     puts "Room count: #{room_count}"
   end

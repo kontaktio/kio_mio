@@ -5,7 +5,7 @@ require 'json'
 require 'csv'
 
 class BaseService
-  def write_content(url, client, parent)
+  def get_content(url, client, parent)
     puts "Getting content from #{url}"
 
     uri = URI.parse(url)
@@ -23,6 +23,7 @@ class BaseService
     response = http.request(request)
 
     json = JSON.parse response.read_body
+
     parent.write_output(json, client)
 
     next_url = json["links"].map{|link| link if link["rel"] == "next"}.compact
@@ -32,5 +33,9 @@ class BaseService
     else
         return next_url.first["href"]
     end
+  end
+
+  def self.check(thing)
+    puts thing.errors.details unless thing.valid?
   end
 end
