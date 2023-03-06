@@ -7,8 +7,11 @@ require 'csv'
 class SpacesService
   def clear_spaces(client)
     Floor.where(client_id: client.id).delete_all
-    client.buildings.delete_all
-    client.rooms.delete_all
+    Building.where(client_id: client.id).delete_all
+    Room.where(client_id: client.id).delete_all
+
+    # client.buildings.delete_all
+    # client.rooms.delete_all
   end
 
   # SpacesService.new.get_spaces(Client.first)
@@ -17,7 +20,7 @@ class SpacesService
     clear_spaces(client)
 
     get_buildings(client)
-    # RoomService.new.get_rooms(client)
+    RoomService.new.get_rooms(client)
   end
 
   def get_buildings(client)
@@ -54,7 +57,8 @@ class SpacesService
                       kio_building_id: building_id,
                       name: floor["name"])
 
-        binding.break
+
+                      # binding.break
 
         BaseService.check(kio_floor)
       end
