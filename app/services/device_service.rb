@@ -35,7 +35,7 @@ class DeviceService
                   firmware: device["firmware"],
                   model: device["model"],
                   mac: device["mac"],
-                  last_seen: device["lastSeen"],
+                  last_seen: Time.at(device["lastSeen"]),
                   deployment_status: device["deployment"]["status"],
                   battery_level: device["batteryLevel"],
                   order_id: device["orderId"],

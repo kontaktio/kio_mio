@@ -3,7 +3,11 @@ class RoomsController < ApplicationController
 
   # GET /rooms or /rooms.json
   def index
-    @rooms = Room.all
+    if params["kio_floor_id"]
+      @rooms = Room.where(kio_floor_id: params["kio_floor_id"])
+    else
+      @rooms = Room.all
+    end
   end
 
   # GET /rooms/1 or /rooms/1.json

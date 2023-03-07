@@ -1,10 +1,7 @@
 <p style="color: green"><%= notice %></p>
-
 <%= render @device %>
-
 <div>
   <%= link_to "Edit this device", edit_device_path(@device) %> |
-  <%= link_to "Back to devices", devices_path %>
-
-  <%= button_to "Destroy this device", @device, method: :delete %>
+  <%= link_to "Back to devices", devices_path %> |
+  <%= link_to "Destroy this device", @device, method: :delete %>
 </div>

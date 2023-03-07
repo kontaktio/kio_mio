@@ -31,3 +31,12 @@
 
 en:
   hello: "Hello world"
+  date:
+    formats:
+      short_d: "%m.%d.%Y"
+      very_short_d: "%b %d %Y"
+      this_year_very_short_d: "%b %d"
+  time:
+    formats:
+      very_short_d: "%b %d %Y %I:%M %P"
+      this_year_very_short_d: "%b %d %I:%M %P"

@@ -1,17 +1,16 @@
 <div class="container-fluid">
   <h1>Devices</h1>
-  <table class="table">
+  <table class="table" id="devices">
     <thead>
       <tr>
         <th>Client</th>
         <th>Kio device</th>
         <th>Unique ID</th>
         <th>Device type</th>
-        <th>Model</th>
+        <th>Last Seen</th>
         <th>Product</th>
         <th>Firmware</th>
         <th>Battery</th>
-        <th>Deployed</th>
         <th>Order</th>
       </tr>
     </thead>
@@ -20,19 +19,24 @@
         <tr>
           <td><%= link_to device.client.name, device.client %></td>
           <td><%= device.mac %></td>
-          <td><%= device.unique_id %></td>
+          <td><%= link_to device.unique_id, device %></td>
           <td><%= device.device_type %></td>
-          <td><%= device.model %></td>
+          <td><%= kio_date_time device.last_seen %></td>
           <td><%= device.product %></td>
           <td><%= device.firmware %></td>
           <td><%= device.battery_level %></td>
-          <td><%= device.deployment_status %></td>
           <td><%= device.order_id %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
   <br>
-  <%# Note the double equals sign "==" which marks the output as trusted and html safe: %>
-  <%== pagy_bootstrap_combo_nav_js(@pagy) %>
 </div>
+<script>
+  $(document).ready(function () {
+   $('#devices').DataTable({
+    "dom": '<"top"i>frtlp<"bottom"><"clear">',
+    pageLength: 50
+   });
+      });
+</script>

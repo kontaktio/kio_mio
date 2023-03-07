@@ -73,5 +73,5 @@ end
 
 gem "thor"
 gem 'bootstrap', '~> 5.2.2'
-gem 'jquery-rails'
 gem 'pagy', '~> 6.0' # omit patch digit
+# https://github.com/Vorkosigan76/rails7-datatables2/blob/main/Gemfile

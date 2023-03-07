@@ -3,7 +3,7 @@ class DevicesController < ApplicationController
 
   # GET /devices or /devices.json
   def index
-    @pagy, @devices = pagy(Device.all)
+    @devices = Device.all
   end
 
   # GET /devices/1 or /devices/1.json
