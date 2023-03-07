@@ -140,6 +140,7 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.14.2-arm64-darwin)
       racc (~> 1.4)
+    pagy (6.0.2)
     popper_js (2.11.6)
     public_suffix (5.0.1)
     puma (5.6.5)
@@ -241,6 +242,7 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   mysql2 (~> 0.5)
+  pagy (~> 6.0)
   puma (~> 5.0)
   rails (~> 7.0.3, >= 7.0.3.1)
   redis (~> 4.0)

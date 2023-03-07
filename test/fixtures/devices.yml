@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  client_id: 1
+  kio_device_id: 1
+  unique_id: MyString
+  device_type: MyString
+  model: MyString
+  product: MyString
+  firmware: MyString
+  order_id: MyString
+
+two:
+  client_id: 1
+  kio_device_id: 1
+  unique_id: MyString
+  device_type: MyString
+  model: MyString
+  product: MyString
+  firmware: MyString
+  order_id: MyString
