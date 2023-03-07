@@ -1,22 +1,18 @@
 <div id="<%= dom_id floor %>">
   <p>
-    <strong>Client:</strong>
-    <%= floor.client_id %>
-  </p>
-
-  <p>
     <strong>Floor:</strong>
-    <%= floor.floor_id %>
+    <%= floor.kio_floor_id %>
   </p>
-
   <p>
     <strong>Name:</strong>
     <%= floor.name %>
   </p>
-
   <p>
     <strong>Building:</strong>
-    <%= floor.building_id %>
+    <%= floor.building.name %>
   </p>
-
+  <p>
+    <strong>Rooms:</strong>
+    <%= link_to floor.rooms.size.to_s, rooms_path(floor.rooms) %>
+  </p>
 </div>

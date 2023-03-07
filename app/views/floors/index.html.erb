@@ -7,19 +7,17 @@
         <th>Floor</th>
         <th>Name</th>
         <th>Building</th>
-        <th colspan="3"></th>
+        <th>Rooms</th>
       </tr>
     </thead>
     <tbody>
       <% @floors.each do |floor| %>
         <tr>
-          <td><%= link_to floor.client.name, floor.client %></td>
-          <td><%= floor.floor_id %></td>
-          <td><%= floor.name %></td>
-          <td><%= floor.building_id %></td>
-          <td><%= link_to 'Show', floor %></td>
-          <td><%= link_to 'Edit', edit_floor_path(floor) %></td>
-          <td><%= link_to 'Destroy', floor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to floor.building.client.name, floor.building.client %></td>
+          <td><%= floor.kio_floor_id %></td>
+          <td><%= link_to floor.name, floor %></td>
+          <td><%= link_to floor.building.name, floor.building %></td>
+          <td><%= link_to floor.rooms.size.to_s, rooms_path(floor.rooms) %></td>
         </tr>
       <% end %>
     </tbody>

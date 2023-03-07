@@ -1,10 +1,4 @@
-require 'uri'
-require 'net/http'
-require 'openssl'
-require 'json'
-require 'csv'
-
-class SpacesService
+class SpaceService
   def clear_spaces(client)
     Floor.where(client_id: client.id).delete_all
     Building.where(client_id: client.id).delete_all
@@ -34,13 +28,16 @@ class SpacesService
 
   def write_output(json, client)
     count = 0
+    # binding.break
+
     json["content"].each do |building|
 
       puts building
 
       building_id = building["id"]
+      kio_building = Building.find_or_create_by(address: building["address"])
 
-      kio_building = Building.create(client_id: client.id,
+      kio_building.update(client_id: client.id,
                   address: building["address"],
                   kio_building_id: building_id,
                   name: building["name"],

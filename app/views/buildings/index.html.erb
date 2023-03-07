@@ -1,38 +1,27 @@
 <div class="container-fluid">
   <h1>Buildings</h1>
-
   <table class="table">
     <thead>
       <tr>
-          <th>Building</th>
-          <th>Name</th>
-          <th>Address</th>
-          <th>Client</th>
-          <th>Lat</th>
-          <th>Lng</th>
-          <th colspan="3"></th>
+        <th>Building</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Client</th>
+        <th>Floors</th>
       </tr>
     </thead>
-
     <tbody>
       <% @buildings.each do |building| %>
         <tr>
-            <td><%= building.building_id %></td>
-            <td><%= building.name %></td>
-            <td><%= building.address %></td>
-            <td><%= building.client_id %></td>
-            <td><%= building.lat %></td>
-            <td><%= building.lng %></td>
-            <td><%= link_to 'Show', building %></td>
-          <td><%= link_to 'Edit', edit_building_path(building) %></td>
-          <td><%= link_to 'Destroy', building, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= building.kio_building_id %></td>
+          <td><%= link_to building.name, building %></td>
+          <td><%= link_to building.client.name, building.client %></td>
+          <td><%= building.address %></td>
+          <td><%= link_to building.floors.size.to_s, floors_path(building.floors) %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-
   <br>
-
   <%= link_to 'New Building', new_building_path, class: "btn btn-primary" %>
-
 </div>

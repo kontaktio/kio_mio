@@ -6,8 +6,8 @@
         <th>Client</th>
         <th>Room #</th>
         <th>Name</th>
-        <th>Floor name</th>
-        <th colspan="3"></th>
+        <th>Floor</th>
+        <th>Building</th>
       </tr>
     </thead>
     <tbody>
@@ -16,10 +16,8 @@
           <td><%= link_to room.client.name, room.client %></td>
           <td><%= room.kio_room_id %></td>
           <td><%= room.name %></td>
-          <td><%= room.kio_floor_id %></td>
-          <td><%= link_to 'Show', room %></td>
-          <td><%= link_to 'Edit', edit_room_path(room) %></td>
-          <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to room.floor.name, room.floor %></td>
+          <td><%= link_to room.floor.building.name, room.floor.building %></td>
         </tr>
       <% end %>
     </tbody>

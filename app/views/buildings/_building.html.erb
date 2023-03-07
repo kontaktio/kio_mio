@@ -1,32 +1,30 @@
 <div id="<%= dom_id building %>">
   <p>
     <strong>Building:</strong>
-    <%= building.building_id %>
+    <%= building.kio_building_id %>
   </p>
-
   <p>
     <strong>Name:</strong>
     <%= building.name %>
   </p>
-
   <p>
     <strong>Address:</strong>
     <%= building.address %>
   </p>
-
   <p>
     <strong>Client:</strong>
-    <%= building.client_id %>
+    <%= link_to building.client.name, building.client %>
   </p>
-
   <p>
-    <strong>Lat:</strong>
-    <%= building.lat %>
-  </p>
-
-  <p>
-    <strong>Lng:</strong>
-    <%= building.lng %>
-  </p>
-
+    <strong>Floors:</strong>
+    <%= link_to building.floors.size.to_s, floors_path(building.floors) %></td>
+</p>
+<p>
+  <strong>Lat:</strong>
+  <%= building.lat %>
+</p>
+<p>
+  <strong>Lng:</strong>
+  <%= building.lng %>
+</p>
 </div>
