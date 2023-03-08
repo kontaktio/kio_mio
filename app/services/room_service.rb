@@ -15,7 +15,7 @@ class RoomService
   end
 
   def write_output(json, client)
-    room_count = 0
+    count = 0
     json["content"].each do |room|
       # binding.break
 
@@ -27,8 +27,8 @@ class RoomService
 
       BaseService.check(r)
 
-      room_count += 1
+      count += 1
     end
-    puts "Room count: #{room_count}"
+    puts "Count: #{count}"
   end
 end

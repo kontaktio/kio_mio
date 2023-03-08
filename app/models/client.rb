@@ -1,4 +1,6 @@
 class Client < ApplicationRecord
   has_many :rooms
-  has_many :buildings, foreign_key: 'kio_building_id'
+  has_many :buildings
+  has_many :floors, through: :buildings
+  has_many :devices
 end

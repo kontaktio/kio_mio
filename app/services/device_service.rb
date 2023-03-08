@@ -1,10 +1,3 @@
-# WIP
-
-# https://developer.kontakt.io/docs/dev-ctr-device-api/4184b4da1e465-get-devices#response-body
-
-# rails g scaffold Device client_id:integer
-# kio_device_id:integer unique_id:string device_type model product firmware order_id
-
 class DeviceService
   def clear_devices(client)
     Device.where(client_id: client.id).delete_all
@@ -34,7 +27,7 @@ class DeviceService
                   unique_id: device["uniqueId"],
                   firmware: device["firmware"],
                   model: device["model"],
-                  mac: device["mac"],
+                  mac: device["mac"].downcase,
                   last_seen: Time.at(device["lastSeen"]),
                   deployment_status: device["deployment"]["status"],
                   battery_level: device["batteryLevel"],

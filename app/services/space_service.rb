@@ -11,8 +11,6 @@ class SpaceService
   # SpacesService.new.get_spaces(Client.first)
 
   def get_spaces(client)
-    clear_spaces(client)
-
     get_buildings(client)
     RoomService.new.get_rooms(client)
   end

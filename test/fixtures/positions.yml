@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  kio_room_id: 1
+  x: 1.5
+  'y': 1.5
+  last_update: 2023-03-07 20:27:16
+
+two:
+  kio_room_id: 1
+  x: 1.5
+  'y': 1.5
+  last_update: 2023-03-07 20:27:16

@@ -1,3 +1,28 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "All", devices_path(@client) %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "Gateways", devices_path(@client, gateways: true) %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "Portal Beams", devices_path(@client, beams: true) %></li>
+  </ol>
+</nav>
+<div class="row">
+  <div class="col">
+    <h4>Device Types</h4>
+    <%= pie_chart @devices.group(:product).count %>
+  </div>
+  <div class="col">
+    <h4>By Firmware</h4>
+    <%= pie_chart @devices.group(:firmware).count %>
+  </div>
+  <div class="col">
+    <h4>By Battery</h4>
+    <%= pie_chart @devices.group(:battery_level).count %>
+  </div>
+  <div class="col">
+    <h4>By Order</h4>
+    <%= pie_chart @devices.group(:order_id).count %>
+  </div>
+</div>
 <div class="container-fluid">
   <h1>Devices</h1>
   <table class="table" id="devices">
@@ -18,7 +43,7 @@
       <% @devices.each do |device| %>
         <tr>
           <td><%= link_to device.client.name, device.client %></td>
-          <td><%= device.mac %></td>
+          <td><%= device.mac.downcase %></td>
           <td><%= link_to device.unique_id, device %></td>
           <td><%= device.device_type %></td>
           <td><%= kio_date_time device.last_seen %></td>

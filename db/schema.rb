@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_07_115619) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_07_202411) do
   create_table "buildings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "kio_building_id"
     t.string "name"
@@ -55,6 +55,26 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_115619) do
     t.integer "kio_floor_id"
     t.string "name"
     t.integer "kio_building_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "positions", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "kio_room_id"
+    t.float "x"
+    t.float "y"
+    t.datetime "last_update"
+    t.string "kio_device_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "presences", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.integer "kio_room_id"
+    t.string "kio_device_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

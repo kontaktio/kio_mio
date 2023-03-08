@@ -1,0 +1,29 @@
+<div class="container-fluid">
+  <h1>Positions</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Kio room</th>
+        <th>As of</th>
+        <th>Device</th>
+        <th>X</th>
+        <th>Y</th>
+        <th>Last update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @positions.each do |position| %>
+        <tr>
+          <td><%= link_to position.room.name, position.room %></td>
+          <td><%= kio_date_time position.last_update %></td>
+          <td><%= link_to position.device.name, position.device %></td>
+          <td><%= position.x %></td>
+          <td><%= position.y %></td>
+          <td><%= position.last_update %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'New Position', new_position_path, class: "btn btn-primary" %>
+</div>

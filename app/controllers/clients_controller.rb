@@ -1,5 +1,5 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: %i[ show edit update destroy ]
+  before_action :set_client, only: %i[ show edit update destroy reset get_all]
 
   # GET /clients or /clients.json
   def index
@@ -17,6 +17,23 @@ class ClientsController < ApplicationController
 
   # GET /clients/1/edit
   def edit
+  end
+
+  def reset
+    Floor.where(client_id: @client.id).delete_all
+    Building.where(client_id: @client.id).delete_all
+    Room.where(client_id: @client.id).delete_all
+    Device.where(client_id: @client.id).delete_all
+
+    respond_to do |format|
+      format.html { redirect_to @client, notice: "Client was successfully reset." }
+      format.json { head :no_content }
+    end
+  end
+
+  def get_all
+    SpaceService.new.get_spaces(@client)
+    DeviceService.new.get_devices(@client)
   end
 
   # POST /clients or /clients.json

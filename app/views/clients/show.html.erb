@@ -12,5 +12,74 @@
     <li class="breadcrumb-item active" aria-current="page"><%= link_to "Floors", client_floors_path(@client) %></li>
     <li class="breadcrumb-item active" aria-current="page"><%= link_to "Rooms", client_rooms_path(@client) %></li>
     <li class="breadcrumb-item active" aria-current="page"><%= link_to "Devices", client_devices_path(@client) %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "Positions", client_positions_path(@client) %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= link_to "Presence", client_presences_path(@client) %></li>
   </ol>
 </nav>
+<div class="container-fluid">
+  <h1><%= @client.name%></h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Entity</th>
+        <th>Last Updated</th>
+        <th>Ago</th>
+        <th>Update Now</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <%=
+            link_to client_buildings_path(@client) do
+              pluralize(@client.buildings.size, "Building")
+            end
+         %>
+        </td>
+        <td><%= last_updated_date(@client.buildings) %></td>
+        <td><%= time_ago_in_words last_updated_date(@client.buildings) unless last_updated_date(@client.buildings) =="-" %></td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>
+          <%=
+            link_to client_floors_path(@client) do
+              pluralize(@client.floors.size, "Floor")
+            end
+         %>
+        </td>
+        <td><%= last_updated_date(@client.floors) %></td>
+        <td><%= time_ago_in_words last_updated_date(@client.floors) unless last_updated_date(@client.buildings) =="-" %></td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>
+          <%=
+            link_to client_rooms_path(@client) do
+              pluralize(@client.rooms.size, "Room")
+            end
+         %>
+        </td>
+        <td><%=  last_updated_date(@client.rooms) %></td>
+        <td><%= time_ago_in_words last_updated_date(@client.rooms) unless last_updated_date(@client.rooms) =="-" %></td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>
+          <%=
+            link_to client_devices_path(@client) do
+              pluralize(@client.devices.size, "Device")
+            end
+         %>
+        </td>
+        <td><%= last_updated_date(@client.devices) %></td>
+        <td><%= time_ago_in_words last_updated_date(@client.devices) unless last_updated_date(@client.devices) =="-" %></td>
+        <td>-</td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'New Client', new_client_path, class: "btn btn-primary" %>
+  <%= link_to 'Reset Client (Careful)', clients_reset_client_path, class: "btn btn-danger" %>
+  <%= link_to 'Get All Data', clients_get_all_client_path, class: "btn btn-success" %>
+</div>

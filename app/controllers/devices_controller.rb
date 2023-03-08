@@ -3,7 +3,13 @@ class DevicesController < ApplicationController
 
   # GET /devices or /devices.json
   def index
-    @devices = Device.all
+    if params["gateways"]
+      @devices = Device.gateways
+    elsif params["beams"]
+      @devices = Device.beams
+    else
+      @devices = Device.all
+    end
   end
 
   # GET /devices/1 or /devices/1.json
