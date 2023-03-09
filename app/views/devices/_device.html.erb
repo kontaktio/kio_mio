@@ -1,38 +1,45 @@
-<div id="<%= dom_id device %>">
-  <p>
-    <strong>Client:</strong>
-    <%= link_to device.client.name, device.client %>
-  </p>
-  <p>
-    <strong>Kio device:</strong>
-    <%= device.kio_device_id %>
-  </p>
-  <p>
-    <strong>Unique:</strong>
-    <%= device.unique_id %>
-  </p>
-  <p>
-    <strong>MAC:</strong>
-    <%= device.mac.downcase %>
-  </p>
-  <p>
-    <strong>Device type:</strong>
-    <%= device.device_type %>
-  </p>
-  <p>
-    <strong>Model:</strong>
-    <%= device.model %>
-  </p>
-  <p>
-    <strong>Product:</strong>
-    <%= device.product %>
-  </p>
-  <p>
-    <strong>Firmware:</strong>
-    <%= device.firmware %>
-  </p>
-  <p>
-    <strong>Order:</strong>
-    <%= device.order_id %>
-  </p>
+<h2>Device: <%= device.unique_id %></h2>
+<div class="row">
+  <div class="col">
+    <p>
+      <strong>Client:</strong>
+      <%= link_to device.client.name, device.client %>
+    </p>
+    <p>
+      <strong>Kio device:</strong>
+      <%= device.kio_device_id %>
+    </p>
+    <p>
+      <strong>Order ID</strong>
+      <%= device.order_id %>
+    </p>
+  </div>
+  <div class="col">
+    <p>
+      <strong>MAC:</strong>
+      <%= device.mac&.downcase %>
+    </p>
+    <p>
+      <strong>Device type:</strong>
+      <%= device.device_type %>
+    </p>
+    <p>
+      <strong>Model:</strong>
+      <%= device.model %>
+    </p>
+  </div>
+  <div class="col">
+    <p>
+      <strong>Product:</strong>
+      <%= device.product %>
+    </p>
+    <p>
+      <strong>Firmware:</strong>
+      <%= device.firmware %>
+    </p>
+    <p>
+      <strong>Battery Level:</strong>
+      <%= device.battery_level %>
+    </p>
+  </div>
 </div>

@@ -63,7 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_202411) do
     t.integer "kio_room_id"
     t.float "x"
     t.float "y"
-    t.datetime "last_update"
+    t.datetime "kio_timestamp"
     t.string "kio_device_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -75,3 +75,5 @@ gem "thor"
 gem 'bootstrap', '~> 5.2.2'
 gem 'pagy', '~> 6.0' # omit patch digit
 gem 'chartkick'
+gem "groupdate"
+gem 'sucker_punch', '~> 3.0'

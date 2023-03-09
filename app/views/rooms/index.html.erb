@@ -15,13 +15,14 @@
         <tr>
           <td><%= link_to room.client.name, room.client %></td>
           <td><%= room.kio_room_id %></td>
-          <td><%= room.name %></td>
+          <td><%= link_to room.name, room %></td>
           <td><%= link_to room.floor.name, room.floor %></td>
           <td><%= link_to room.floor.building.name, room.floor.building %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
-  <br>
-  <%= link_to 'New Room', new_room_path, class: "btn btn-primary" %>
+</div>
+<div class="pt-4">
+  <%== pagy_bootstrap_combo_nav_js(@pagy) %>
 </div>

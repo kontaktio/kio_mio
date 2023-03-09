@@ -1,7 +1,9 @@
-<p style="color: green"><%= notice %></p>
 <%= render @device %>
 <div>
-  <%= link_to "Edit this device", edit_device_path(@device) %> |
-  <%= link_to "Back to devices", devices_path %> |
-  <%= link_to "Destroy this device", @device, method: :delete %>
+  <%= link_to "All devices", client_devices_path(@device.client) %>
+  <div class="pt-2">
+    <%= link_to "Update presence", update_presence_device_path(@device), class: "btn btn-success"  %>
+    <%= link_to "Delete presence data (careful!)", delete_presence_device_path(@device), class: "btn btn-danger" %>
+  </div>
 </div>
+<%= render partial: 'presences/presence_table', locals: { presences: @device.presences } %>

@@ -1,35 +1,41 @@
-<nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item active" aria-current="page"><%= link_to "All", devices_path(@client) %></li>
-    <li class="breadcrumb-item active" aria-current="page"><%= link_to "Gateways", devices_path(@client, gateways: true) %></li>
-    <li class="breadcrumb-item active" aria-current="page"><%= link_to "Portal Beams", devices_path(@client, beams: true) %></li>
-  </ol>
-</nav>
-<div class="row">
+<%= form_tag(client_devices_path(@client), method: 'get') do %>
+  <%= label_tag(:last_seen, "Last Seen (days):") %>
+  <%= text_field_tag(:last_seen, @last_seen) %>
+  <%= select_tag(:device_type,
+      options_for_select([['All', 1], ['Gateways', 2],
+      ['Portal Beams', 3], ['Beacons', 4], ['Tags', 5]],
+      selected: @device_type)) %>
+  <%= submit_tag("Filter") %>
+<% end %>
+<div class="row pt-5">
+  <% pie_height = "200px" %>
   <div class="col">
     <h4>Device Types</h4>
-    <%= pie_chart @devices.group(:product).count %>
+    <%= pie_chart @devices.group(:product).count, height: pie_height %>
   </div>
   <div class="col">
-    <h4>By Firmware</h4>
-    <%= pie_chart @devices.group(:firmware).count %>
+    <h4>Firmware</h4>
+    <%= pie_chart @devices.group(:firmware).count, height: pie_height %>
   </div>
   <div class="col">
-    <h4>By Battery</h4>
-    <%= pie_chart @devices.group(:battery_level).count %>
+    <h4>Battery Level</h4>
+    <%= pie_chart @devices.group(:battery_level).count, height: pie_height %>
   </div>
   <div class="col">
-    <h4>By Order</h4>
-    <%= pie_chart @devices.group(:order_id).count %>
+    <h4>Order ID</h4>
+    <%= pie_chart @devices.group(:order_id).count, height: pie_height %>
   </div>
-</div>
+</div class="pb-3">
+<h4>Last seen</h4>
+<%= column_chart @devices.group_by_day(:last_seen).count, height: "100px"  %>
 <div class="container-fluid">
   <h1>Devices</h1>
   <table class="table" id="devices">
     <thead>
       <tr>
         <th>Client</th>
-        <th>Kio device</th>
+        <th>Mac</th>
+        <th>Kio ID</th>
         <th>Unique ID</th>
         <th>Device type</th>
         <th>Last Seen</th>
@@ -43,7 +49,8 @@
       <% @devices.each do |device| %>
         <tr>
           <td><%= link_to device.client.name, device.client %></td>
-          <td><%= device.mac.downcase %></td>
+          <td><%= device.mac&.downcase %></td>
+          <td><%= device.kio_device_id %></td>
           <td><%= link_to device.unique_id, device %></td>
           <td><%= device.device_type %></td>
           <td><%= kio_date_time device.last_seen %></td>
@@ -60,8 +67,12 @@
 <script>
   $(document).ready(function () {
    $('#devices').DataTable({
-    "dom": '<"top"i>frtlp<"bottom"><"clear">',
-    pageLength: 50
-   });
-      });
+    "dom": '<"search"f><"pagination"ip>',
+    columnDefs: [
+      { type: 'date', targets: 5 }
+    ],
+    pageLength: 50,
+    "order": [[5, "desc"]]
+   })
+  });
 </script>

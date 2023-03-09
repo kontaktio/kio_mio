@@ -57,9 +57,8 @@ class BaseService
 
     response = http.request(request)
     json = JSON.parse response.read_body
-    parent.write_output(json, client)
 
-    # binding.break
+    parent.write_output(json, client)
 
     next_url = json["searchMeta"]["nextResults"]
 

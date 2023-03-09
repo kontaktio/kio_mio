@@ -1,9 +1,15 @@
 class BuildingsController < ApplicationController
-  before_action :set_building, only: %i[ show edit update destroy ]
+  before_action :set_building, only: %i[ show edit update destroy]
 
   # GET /buildings or /buildings.json
   def index
-    @buildings = Building.all
+    @client = Client.find(params[:client_id])
+
+    if @client.nil?
+      @buildings = Building.all
+    else
+      @buildings = Building.where(client_id: @client.id)
+    end
   end
 
   # GET /buildings/1 or /buildings/1.json

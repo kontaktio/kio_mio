@@ -4,8 +4,6 @@ class DeviceService
   end
 
   def get_devices(client)
-    clear_devices(client)
-
     bs = BaseService.new
       url = "https://api.kontakt.io/device"
 
@@ -22,13 +20,15 @@ class DeviceService
 
     json["devices"].each do |device|
 
+      last_seen = Time.at(device["lastSeen"]) unless device["lastSeen"].nil?
+
       d = Device.create(client_id: client.id,
                   kio_device_id: device["id"],
                   unique_id: device["uniqueId"],
                   firmware: device["firmware"],
                   model: device["model"],
-                  mac: device["mac"].downcase,
-                  last_seen: Time.at(device["lastSeen"]),
+                  mac: device["mac"]&.downcase,
+                  last_seen: last_seen,
                   deployment_status: device["deployment"]["status"],
                   battery_level: device["batteryLevel"],
                   order_id: device["orderId"],

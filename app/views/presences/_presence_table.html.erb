@@ -1,0 +1,39 @@
+<% @presences = presences %>
+<div class="container-fluid">
+  <h3 class="pt-5">Presences</h3>
+  <table class="table" id="presences">
+    <thead>
+      <tr>
+        <th>Building</th>
+        <th>Floor</th>
+        <th>Room</th>
+        <th>Device</th>
+        <th>Start time</th>
+        <th>End time</th>
+        <th>Minutes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @presences.each do |presence| %>
+        <tr>
+          <td><%= link_to presence.room.floor.building.name, presence.room.floor.building %></td>
+          <td><%= link_to presence.room.floor.name, presence.room.floor %></td>
+          <td><%= link_to presence.room.name, presence.room %></td>
+          <td><%= link_to presence.device.name, presence.device %></td>
+          <td><%= kio_date_time presence.start_time %></td>
+          <td><%= kio_date_time presence.end_time %></td>
+          <td><%= number_with_precision(presence.device_duration, precision: 2) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<script>
+  $(document).ready(function () {
+   $('#presences').DataTable({
+    "dom": '<"top"i>frtlp<"bottom"><"clear">',
+    pageLength: 10,
+    order: [[ 5, "asc" ]]
+   });
+      });
+</script>

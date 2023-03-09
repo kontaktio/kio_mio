@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <h1>Buildings</h1>
+  <%= render partial: 'maps', locals: { buildings: @buildings } %>
   <table class="table">
     <thead>
       <tr>
         <th>Building</th>
-        <th>Name</th>
         <th>Address</th>
         <th>Client</th>
         <th>Floors</th>
@@ -13,7 +13,6 @@
     <tbody>
       <% @buildings.each do |building| %>
         <tr>
-          <td><%= building.kio_building_id %></td>
           <td><%= link_to building.name, building %></td>
           <td><%= link_to building.client.name, building.client %></td>
           <td><%= building.address %></td>

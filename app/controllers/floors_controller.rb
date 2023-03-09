@@ -3,7 +3,11 @@ class FloorsController < ApplicationController
 
   # GET /floors or /floors.json
   def index
-    @floors = Floor.all
+    if @client.nil?
+      @pagy, @floors = pagy(Floor.all)
+    else
+      @pagy, @floors = pagy(Floor.where(client_id: @client.id))
+    end
   end
 
   # GET /floors/1 or /floors/1.json

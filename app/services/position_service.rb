@@ -3,6 +3,7 @@ class PositionService
     bs = BaseService.new
       url = "https://apps.cloud.us.kontakt.io/v2/positions"
       url = url + "?trackingId=#{tracking_id}"
+
       bs.get_content(url, client, self)
   end
 

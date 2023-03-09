@@ -1,10 +1,21 @@
 Rails.application.routes.draw do
   resources :presences
   resources :positions
-  resources :devices
-  resources :floors
+  resources :devices do
+    member do
+      get 'update_presence', to: 'devices#update_presence'
+      get 'update_positions', to: 'devices#update_positions'
+      get "add_devices", to: "devices#add_devices"
+      get "delete_presence", to: "devices#delete_presence"
+    end
+  end
+resources :floors
   resources :buildings
-  resources :rooms
+  resources :rooms do
+    member do
+      get 'update_presence', to: 'rooms#update_presence'
+    end
+  end
   resources :clients do
     member do
       get '/clients/reset', to: 'clients#reset'

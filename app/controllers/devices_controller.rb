@@ -1,16 +1,72 @@
 class DevicesController < ApplicationController
-  before_action :set_device, only: %i[ show edit update destroy ]
+  before_action :set_device, only: %i[ show edit update destroy
+    update_presence update_positions delete_presence]
 
   # GET /devices or /devices.json
   def index
-    if params["gateways"]
-      @devices = Device.gateways
-    elsif params["beams"]
-      @devices = Device.beams
+    @client = Client.find(params[:client_id])
+
+    # binding.break
+    @last_seen = params["last_seen"] || 7
+    params["device_type"].blank? ? @device_type = 1 : @device_type = params["device_type"].to_i
+
+    case params["device_type"].to_i
+    when 2
+      @devices = @client.devices.gateways
+    when 3
+      @devices = @client.devices.portal_beams
+    when 4
+      @devices = @client.devices.beacons
+    when 5
+      @devices = @client.devices.tags
     else
-      @devices = Device.all
+      @devices = @client.devices
+    end
+
+    unless @last_seen.nil? || @last_seen.blank?
+      ls = DateTime.now
+      ls = ls - @last_seen.to_i.days
+      @devices = @devices.where("last_seen > ?", ls)
     end
   end
+
+  def update_presence
+    PresenceJob.perform_async(@device.client, @device.mac)
+    # PresenceService.new.get_presence(@device.client, @device.mac)
+    respond_to do |format|
+      format.html { redirect_to @device, notice: "Device presence determined." }
+      format.json { head :no_content }
+    end
+  end
+
+  def update_positions
+    PositionsService.new.get_positions(@device.client, @device.mac)
+    respond_to do |format|
+      format.html { redirect_to @device, notice: "Device locations determined." }
+      format.json { head :no_content }
+    end
+  end
+
+  def delete_presence
+    @device.presences.destroy_all
+
+    respond_to do |format|
+      format.html { redirect_to @device, notice: "Device locations deleted." }
+      format.json { head :no_content }
+    end
+  end
+
+  def add_devices
+    @client = Client.find(params[:client_id])
+
+    DeviceJob.perform_async(@client)
+
+    respond_to do |format|
+      format.html { redirect_to @client, notice: "Device locations determined." }
+      format.json { head :no_content }
+    end
+  end
+
 
   # GET /devices/1 or /devices/1.json
   def show

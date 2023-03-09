@@ -4,7 +4,6 @@
     <thead>
       <tr>
         <th>Client</th>
-        <th>Floor</th>
         <th>Name</th>
         <th>Building</th>
         <th>Rooms</th>
@@ -13,10 +12,9 @@
     <tbody>
       <% @floors.each do |floor| %>
         <tr>
-          <td><%= link_to floor.building.client.name, floor.building.client %></td>
-          <td><%= floor.kio_floor_id %></td>
+          <td><%= link_to floor.client&.name, floor&.client %></td>
           <td><%= link_to floor.name, floor %></td>
-          <td><%= link_to floor.building.name, floor.building %></td>
+          <td><%= link_to floor.building&.name, floor&.building %></td>
           <td><%= link_to floor.rooms.size.to_s, rooms_path(floor.rooms) %></td>
         </tr>
       <% end %>
@@ -24,4 +22,7 @@
   </table>
   <br>
   <%= link_to 'New Floor', new_floor_path, class: "btn btn-primary" %>
+</div>
+<div class="pt-4">
+  <%== pagy_bootstrap_combo_nav_js(@pagy) %>
 </div>

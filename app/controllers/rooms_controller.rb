@@ -1,17 +1,23 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[ show edit update destroy ]
+  before_action :set_room, only: %i[ show edit update destroy update_presence ]
 
   # GET /rooms or /rooms.json
   def index
-    if params["kio_floor_id"]
-      @rooms = Room.where(kio_floor_id: params["kio_floor_id"])
-    else
-      @rooms = Room.all
-    end
+      @client = Client.find(params[:client_id])
+      @pagy, @rooms = pagy(Room.where(client_id: @client.id))
   end
 
   # GET /rooms/1 or /rooms/1.json
   def show
+  end
+
+  def update_presence
+    Presence.where(kio_device_id: @room.kio_room_id).destroy_all
+    PresenceService.new.get_presence_by_room(@room.client, @room.kio_room_id)
+    respond_to do |format|
+      format.html { redirect_to @room, notice: "Room presence determined." }
+      format.json { head :no_content }
+    end
   end
 
   # GET /rooms/new
@@ -48,16 +54,6 @@ class RoomsController < ApplicationController
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @room.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /rooms/1 or /rooms/1.json
-  def destroy
-    @room.destroy
-
-    respond_to do |format|
-      format.html { redirect_to rooms_url, notice: "Room was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
