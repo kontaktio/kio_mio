@@ -50,4 +50,6 @@ test:
 #
 production:
   <<: *default
+  pool: 40
+  timeout: 5000
   url: <%= ENV['PROD_DATABASE_URL'] %>
