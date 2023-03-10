@@ -34,8 +34,11 @@ class ClientsController < ApplicationController
   end
 
   def get_all
-    SpaceService.new.get_spaces(@client)
-    DeviceService.new.get_devices(@client)
+    SetupJob.perform_async(@client)
+    respond_to do |format|
+      format.html { redirect_to @client, notice: "Client being set up..." }
+      format.json { head :no_content }
+    end
   end
 
   # POST /clients or /clients.json
