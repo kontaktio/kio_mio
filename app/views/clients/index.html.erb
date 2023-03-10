@@ -1,25 +1,28 @@
 <div class="container-fluid">
   <h1>Clients</h1>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Api key</th>
-        <th>User</th>
-        <th>Pass</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @clients.each do |client| %>
-        <tr>
-          <td><%= link_to client.name, client %></td>
-          <td><%= client.api_key %></td>
-          <td><%= client.user %></td>
-          <td><%= client.pass %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <br>
-  <%= link_to 'New Client', new_client_path, class: "btn btn-primary" %>
+  <div class="row">
+    <div class="col">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Api key</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @clients.each do |client| %>
+            <tr>
+              <td><%= link_to client.name, client %></td>
+              <td><%= client.api_key %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <br>
+      <%= link_to 'New Client', new_client_path, class: "btn btn-primary" %>
+    </div>
+    <div class="col pt-5">
+      <%= render partial: '/buildings/maps', locals: { buildings: Building.all } %>
+    </div>
+  </div>
 </div>

@@ -1,0 +1,47 @@
+<div class="container-fluid">
+  <h1>Telemetries</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Tracking</th>
+        <th>Timestamp</th>
+        <th>Battery level</th>
+        <th>Channel</th>
+        <th>Humidity</th>
+        <th>Light</th>
+        <th>Rssi</th>
+        <th>Temperature</th>
+        <th>Air quality</th>
+        <th>Firmware</th>
+        <th>Model</th>
+        <th>Moving</th>
+        <th>Client</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @telemetries.each do |telemetry| %>
+        <tr>
+          <td><%= telemetry.tracking_id %></td>
+          <td><%= telemetry.timestamp %></td>
+          <td><%= telemetry.battery_level %></td>
+          <td><%= telemetry.channel %></td>
+          <td><%= telemetry.humidity %></td>
+          <td><%= telemetry.light %></td>
+          <td><%= telemetry.rssi %></td>
+          <td><%= telemetry.temperature %></td>
+          <td><%= telemetry.air_quality %></td>
+          <td><%= telemetry.firmware %></td>
+          <td><%= telemetry.model %></td>
+          <td><%= telemetry.moving %></td>
+          <td><%= telemetry.client_id %></td>
+          <td><%= link_to 'Show', telemetry %></td>
+          <td><%= link_to 'Edit', edit_telemetry_path(telemetry) %></td>
+          <td><%= link_to 'Destroy', telemetry, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+  <%= link_to 'New Telemetry', new_telemetry_path, class: "btn btn-primary" %>
+</div>

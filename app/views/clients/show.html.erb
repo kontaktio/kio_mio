@@ -78,3 +78,6 @@
     <%= link_to 'Get Space / Device Data', clients_get_all_client_path, class: "btn btn-success" %>
   </div>
 </div>
+<div class="pt-5">
+  <%= render partial: '/buildings/maps', locals: { buildings: @client.buildings } %>
+</div>

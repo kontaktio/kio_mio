@@ -1,6 +1,7 @@
+<% @buildings = buildings %>
 <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js'></script>
 <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css' rel='stylesheet' />
-<div data-turbolinks="false" style="height:300px; width:100%; background:#000000" id="kiomap"></div>
+<div data-turbolinks="false" style="height:500px; width:100%; background:#000000" id="kiomap"></div>
 <script>
   mapboxgl.accessToken = 'pk.eyJ1IjoidGhlYWxleSIsImEiOiJjajhveWV4cDIwYTg3MnFvM28yMm93YmM4In0.1g8ow7OIKJ8J-4LZbYg3Vg';
 
@@ -16,11 +17,22 @@
   var bounds = new mapboxgl.LngLatBounds();
 
   <% @buildings.each do |building| %>
+
+     popup = new mapboxgl.Popup({ offset: 25 }).setText(
+      'Construction on the Washington Monument began in 1848.'
+    );
+
     var m = new mapboxgl.Marker()
       .setLngLat([<%= building.lng %>, <%= building.lat %>])
+      .setPopup(new mapboxgl.Popup({ offset: 50 }).setHTML(
+          "<h4><%= building.client.name %>: <%= building.name %></h4>"
+        ))
       .addTo(map);
 
       bounds.extend([<%= building.lng %>, <%= building.lat %>]);
+
+
+
   <% end %>
 
   map.fitBounds(bounds, {

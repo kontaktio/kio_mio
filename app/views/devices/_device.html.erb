@@ -42,4 +42,27 @@
       <%= device.battery_level %>
     </p>
   </div>
+  <div class="col">
+    <p>
+    </p>
+  </div>
+  <div class="col">
+    <p>
+      <u>Log into <%= device.client.name %> first..</u>
+    </p>
+    <p>
+      <strong>Device Management Link:</strong>
+      <%= link_to device.unique_id,
+      "https://app.cloud.us.kontakt.io/device-management/devices/beacon/" +
+      device.unique_id + "/general",
+      target: "top" %>
+    </p>
+    <p>
+      <strong>Smart Location Link:</strong>
+      <%= link_to device.unique_id,
+      "https://app.cloud.us.kontakt.io/smart-location/device/" +
+      device.unique_id,
+      target: "top" %>
+    </p>
+  </div>
 </div>

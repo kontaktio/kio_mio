@@ -1,0 +1,31 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tracking_id: MyString
+  timestamp: MyString
+  battery_level: 1
+  channel: 1
+  humidity: 1
+  light: 1
+  rssi: 1
+  temperature: 1.5
+  air_quality: 1
+  firmware: MyString
+  model: 1
+  moving: false
+  client_id: 1
+
+two:
+  tracking_id: MyString
+  timestamp: MyString
+  battery_level: 1
+  channel: 1
+  humidity: 1
+  light: 1
+  rssi: 1
+  temperature: 1.5
+  air_quality: 1
+  firmware: MyString
+  model: 1
+  moving: false
+  client_id: 1

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @telemetry %>
+
+<div>
+  <%= link_to "Edit this telemetry", edit_telemetry_path(@telemetry) %> |
+  <%= link_to "Back to telemetries", telemetries_path %>
+
+  <%= button_to "Destroy this telemetry", @telemetry, method: :delete %>
+</div>
