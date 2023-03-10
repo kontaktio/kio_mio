@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get 'update_presence', to: 'devices#update_presence'
       get 'update_positions', to: 'devices#update_positions'
       get "add_devices", to: "devices#add_devices"
+      get "debug", to: "devices#debug"
       get "delete_presence", to: "devices#delete_presence"
     end
   end
@@ -14,6 +15,7 @@ resources :floors
   resources :rooms do
     member do
       get 'update_presence', to: 'rooms#update_presence'
+      get "delete_presence", to: "rooms#delete_presence"
     end
   end
   resources :clients do

@@ -3,7 +3,9 @@ class PresencesController < ApplicationController
 
   # GET /presences or /presences.json
   def index
-    @presences = Presence.all
+    @client = Client.find(params[:client_id])
+    @presences = @client.presences.map { |p| p if p.device_type == "BEACON" }.compact
+    @devices = @presences.map(&:device).uniq
   end
 
   # GET /presences/1 or /presences/1.json

@@ -1,22 +1,30 @@
-<div id="<%= dom_id room %>">
-  <p>
-    <strong>Client:</strong>
-    <%= link_to room.client.name, room.client %>
-  </p>
-  <p>
-    <strong>Room:</strong>
-    <%= room.kio_room_id %>
-  </p>
-  <p>
-    <strong>Name:</strong>
-    <%= room.name %>
-  </p>
-  <p>
-    <strong>Floor name:</strong>
-    <%= room.floor.name %>
-  </p>
-  <p>
-    <strong>Building name:</strong>
-    <%= room.floor.building.name %>
-  </p>
+<div class="row">
+  <div class="col">
+    <div id="<%= dom_id room %>">
+      <h3>Room: <%= room.kio_room_id.to_s %></h3>
+      <p>
+        <strong>Client:</strong>
+        <%= link_to room.client.name, room.client %>
+      </p>
+      <p>
+        <strong>Room:</strong>
+        <%= room.kio_room_id %>
+      </p>
+      <p>
+        <strong>Name:</strong>
+        <%= room.name %>
+      </p>
+      <p>
+        <strong>Floor name:</strong>
+        <%= room.floor.name %>
+      </p>
+      <p>
+        <strong>Building name:</strong>
+        <%= room.floor.building.name %>
+      </p>
+    </div>
+  </div>
+  <div class="col">
+    <h4>Infrastructure</h4>
+  </div>
 </div>

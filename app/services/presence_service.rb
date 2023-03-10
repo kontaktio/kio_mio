@@ -10,6 +10,7 @@ class PresenceService
     url = url + "&startTime=#{start_time}"
 
     while !url.nil?
+        url.gsub!("maxResult=50", "maxResult=250")
         url = bs.get_content(url, client, self)
     end
   end
@@ -19,7 +20,7 @@ class PresenceService
     url = "https://apps.cloud.us.kontakt.io/v3/presences/history"
     url = url + "?trackingId=#{tracking_id}"
 
-    last_week = DateTime.now - 1.hour
+    last_week = DateTime.now - 6.hours
     start_time = last_week.utc.iso8601
     url = url + "&startTime=#{start_time}"
 
@@ -40,7 +41,7 @@ class PresenceService
       start_time = Time.parse(presence["startTime"]) unless presence["startTime"].nil?
       end_time = Time.parse(presence["endTime"]) unless presence["endTime"].nil?
 
-      p = Presence.create(kio_room_id: presence["roomId"],
+      p = Presence.find_or_create_by(kio_room_id: presence["roomId"],
                   kio_device_id: device.kio_device_id,
                   start_time: start_time,
                   end_time: end_time)

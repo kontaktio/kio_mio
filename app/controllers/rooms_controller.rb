@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[ show edit update destroy update_presence ]
+  before_action :set_room, only: %i[ show edit update destroy
+      update_presence delete_presence ]
 
   # GET /rooms or /rooms.json
   def index
@@ -12,10 +13,17 @@ class RoomsController < ApplicationController
   end
 
   def update_presence
-    Presence.where(kio_device_id: @room.kio_room_id).destroy_all
     PresenceService.new.get_presence_by_room(@room.client, @room.kio_room_id)
     respond_to do |format|
       format.html { redirect_to @room, notice: "Room presence determined." }
+      format.json { head :no_content }
+    end
+  end
+
+  def delete_presence
+    Presence.where(kio_room_id: @room.kio_room_id).destroy_all
+    respond_to do |format|
+      format.html { redirect_to @room, notice: "Room presence deleted." }
       format.json { head :no_content }
     end
   end

@@ -1,4 +1,19 @@
+<p/>
 <% @presences = presences %>
+<% duration_average = (@presences.map { |presence| presence.device_duration }.compact.sum / @presences.size) unless @presences.size == 0 %>
+<% if !duration_average.nil? %>
+  <% if duration_average < 2 %>
+    <div class="alert alert-danger text-center" role="alert">
+      Average Duration of Stay: <%= number_with_precision(duration_average, precision: 2).to_s %> - Possible Hopping
+    </div>
+  <% else %>
+    <div class="alert alert-success text-center" role="alert">
+      Average Duration of Stay: <%= number_with_precision(duration_average, precision: 2).to_s %>
+    </div>
+  <% end %>
+<% end %>
+<% average_durations = @presences.map { |presence| [presence.start_time, presence.device_duration] }.compact unless presences.size == 0 %>
+<%= column_chart(average_durations) %>
 <div class="container-fluid">
   <h3 class="pt-5">Presences</h3>
   <table class="table" id="presences">

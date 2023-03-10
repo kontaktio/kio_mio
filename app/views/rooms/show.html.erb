@@ -2,8 +2,9 @@
 <div>
   <%= link_to "Edit this room", edit_room_path(@room) %> |
   <%= link_to "Back to rooms", client_rooms_path(@room.client) %>
-  <div class="pt-3">
+  <div class="pt-3 text-center">
     <%= link_to "Update presence", update_presence_room_path(@room), class: "btn btn-success" %>
+    <%= link_to "Delete presence data (careful!)", delete_presence_room_path(@room), class: "btn btn-danger" %>
   </div>
 </div>
 <%= render partial: 'presences/presence_table', locals: { presences: @room.presences } %>

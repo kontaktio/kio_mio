@@ -1,6 +1,6 @@
 class DevicesController < ApplicationController
   before_action :set_device, only: %i[ show edit update destroy
-    update_presence update_positions delete_presence]
+    update_presence update_positions delete_presence debug]
 
   # GET /devices or /devices.json
   def index
@@ -8,9 +8,9 @@ class DevicesController < ApplicationController
 
     # binding.break
     @last_seen = params["last_seen"] || 7
-    params["device_type"].blank? ? @device_type = 1 : @device_type = params["device_type"].to_i
+    params["device_type"].blank? ? @device_type = 5 : @device_type = params["device_type"].to_i
 
-    case params["device_type"].to_i
+    case @device_type
     when 2
       @devices = @client.devices.gateways
     when 3
@@ -35,6 +35,14 @@ class DevicesController < ApplicationController
     # PresenceService.new.get_presence(@device.client, @device.mac)
     respond_to do |format|
       format.html { redirect_to @device, notice: "Device presence determined." }
+      format.json { head :no_content }
+    end
+  end
+
+  def debug
+    DeviceDebugJob.perform_async(@device.client, @device)
+    respond_to do |format|
+      format.html { redirect_to @device, notice: "Device debug report created." }
       format.json { head :no_content }
     end
   end

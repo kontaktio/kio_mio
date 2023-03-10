@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_07_202411) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_10_091801) do
   create_table "buildings", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.integer "kio_building_id"
     t.string "name"
@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_07_202411) do
     t.integer "battery_level"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "position_debugging"
     t.check_constraint "json_valid(`telemetry_fields`)", name: "telemetry_fields"
   end
 

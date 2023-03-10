@@ -58,10 +58,23 @@
         <td><%= time_ago_in_words last_updated_date(@client.devices) unless last_updated_date(@client.devices) =="-" %></td>
         <td><%= link_to 'Refresh', add_devices_device_path(client_id: @client.id) %></td>
       </tr>
+      <tr>
+        <td>
+          <%=
+            link_to client_presences_path(@client) do
+              pluralize(@client.presences.size, "Presences")
+            end
+         %>
+        </td>
+        <td><%= last_updated_date(@client.devices) %></td>
+        <td><%= time_ago_in_words last_updated_date(@client.devices) unless last_updated_date(@client.devices) =="-" %></td>
+        <td><%= link_to 'Refresh', add_devices_device_path(client_id: @client.id) %></td>
+      </tr>
     </tbody>
   </table>
-  <br>
-  <%= link_to 'New Client', new_client_path, class: "btn btn-primary" %>
-  <%= link_to 'Reset Client (Careful)', clients_reset_client_path, class: "btn btn-danger" %>
-  <%= link_to 'Get Space Data', clients_get_all_client_path, class: "btn btn-success" %>
+  <div class="pt-2 text-center">
+    <%= link_to 'New Client', new_client_path, class: "btn btn-primary" %>
+    <%= link_to 'Reset Client (Careful)', clients_reset_client_path, class: "btn btn-danger" %>
+    <%= link_to 'Get Space Data', clients_get_all_client_path, class: "btn btn-success" %>
+  </div>
 </div>
