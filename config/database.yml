@@ -50,6 +50,4 @@ test:
 #
 production:
   <<: *default
-  database: kio_mio_production
-  username: kio_mio
-  password: <%= ENV["KIO_MIO_DATABASE_PASSWORD"] %>
+  url: <%= ENV['PROD_DATABASE_URL'] %>

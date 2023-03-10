@@ -2,6 +2,7 @@
   <a class="navbar-brand" href="/">
     <%= image_tag('kontakt-logo.png', width: "120", class: "d-inline-block align-middle") %>
   </a>
+  <%= link_to 'Logout', auth_logout_path, method: :get, data: { turbo: false } %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

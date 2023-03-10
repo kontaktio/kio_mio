@@ -1,4 +1,5 @@
 class DevicesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_device, only: %i[ show edit update destroy
     update_presence update_positions delete_presence debug]
 

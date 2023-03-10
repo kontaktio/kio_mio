@@ -78,3 +78,5 @@ gem 'chartkick'
 gem "groupdate"
 gem 'sucker_punch', '~> 3.0'
 gem "down", "~> 5.0"
+gem 'omniauth-auth0', '~> 3.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0' # prevents forged authentication requests

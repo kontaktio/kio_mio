@@ -9,5 +9,8 @@
 <%= render partial: 'presences/presence_table', locals: { presences: @device.presences } %>
 <h3>Device Debugging</h3>
 <%= link_to "Debug device", debug_device_path(@device), class: "btn btn-warning"  %>
-<p/>
-<%== simple_format bash_to_html_colors(( @device.position_debugging)) %>
+<p class="pt-2">
+  <% unless @device.position_debugging.blank? %>
+    <%== simple_format bash_to_html_colors(( @device.position_debugging)) %>
+  <% end %>
+</p>

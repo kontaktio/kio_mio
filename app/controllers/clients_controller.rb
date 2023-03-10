@@ -1,4 +1,6 @@
 class ClientsController < ApplicationController
+  before_action :authenticate_user!, except: [:login]
+
   before_action :set_client, only: %i[ show edit update destroy reset get_all]
 
   # GET /clients or /clients.json
@@ -84,4 +86,5 @@ class ClientsController < ApplicationController
     def client_params
       params.require(:client).permit(:name, :api_key, :user, :pass)
     end
+
 end

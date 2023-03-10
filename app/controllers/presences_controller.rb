@@ -1,10 +1,11 @@
 class PresencesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_presence, only: %i[ show edit update destroy ]
 
   # GET /presences or /presences.json
   def index
     @client = Client.find(params[:client_id])
-    @presences = @client.presences.map { |p| p if p.device_type == "BEACON" }.compact
+    @presences = @client.presences.map { |p| p if p.device.device_type == "BEACON" }.compact
     @devices = @presences.map(&:device).uniq
   end
 

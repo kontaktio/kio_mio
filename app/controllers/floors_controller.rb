@@ -1,4 +1,5 @@
 class FloorsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_floor, only: %i[ show edit update destroy ]
 
   # GET /floors or /floors.json
