@@ -3,6 +3,11 @@ class DevicesController < ApplicationController
   before_action :set_device, only: %i[ show edit update destroy
     update_presence update_positions delete_presence debug]
 
+  def debugging
+    @client = Client.find(params[:client_id])
+    @devices = @client.devices.debugging
+  end
+
   # GET /devices or /devices.json
   def index
     @client = Client.find(params[:client_id])
@@ -15,7 +20,7 @@ class DevicesController < ApplicationController
     when 2
       @devices = @client.devices.gateways
     when 3
-      @devices = @client.devices.portal_beams
+      @devices = @client.devices.beams
     when 4
       @devices = @client.devices.beacons
     when 5

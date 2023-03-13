@@ -1,0 +1,48 @@
+<div class="container-fluid">
+  <h1>Devices</h1>
+  <table class="table" id="devices">
+    <thead>
+      <tr>
+        <th>Client</th>
+        <th>Mac</th>
+        <th>Kio ID</th>
+        <th>Unique ID</th>
+        <th>Device type</th>
+        <th>Last Seen</th>
+        <th>Product</th>
+        <th>Firmware</th>
+        <th>Battery</th>
+        <th>Order</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @devices.each do |device| %>
+        <tr>
+          <td><%= link_to device.client.name, device.client %></td>
+          <td><%= device.mac&.downcase %></td>
+          <td><%= device.kio_device_id %></td>
+          <td><%= link_to device.unique_id, device %></td>
+          <td><%= device.device_type %></td>
+          <td><%= kio_date_time device.last_seen %></td>
+          <td><%= device.product %></td>
+          <td><%= device.firmware %></td>
+          <td><%= device.battery_level %></td>
+          <td><%= device.order_id %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <br>
+</div>
+<script>
+  $(document).ready(function () {
+   $('#devices').DataTable({
+    "dom": '<"search"f><"pagination"ip>',
+    columnDefs: [
+      { type: 'date', targets: 5 }
+    ],
+    pageLength: 50,
+    "order": [[5, "desc"]]
+   })
+  });
+</script>

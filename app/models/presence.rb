@@ -8,4 +8,5 @@ class Presence < ApplicationRecord
       return seconds / 60
     end
   end
+
 end

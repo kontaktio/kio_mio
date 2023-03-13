@@ -15,6 +15,9 @@ Rails.application.routes.draw do
       get "debug", to: "devices#debug"
       get "delete_presence", to: "devices#delete_presence"
     end
+    collection do
+      get "debugging", to: "devices#debugging"
+    end
   end
 resources :floors
   resources :buildings

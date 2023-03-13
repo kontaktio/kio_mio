@@ -70,6 +70,18 @@
         <td><%= time_ago_in_words last_updated_date(@client.devices) unless last_updated_date(@client.devices) =="-" %></td>
         <td><%= link_to 'Refresh', add_devices_device_path(client_id: @client.id) %></td>
       </tr>
+      <tr>
+        <td>
+          <%=
+            link_to debugging_devices_path(client_id: @client) do
+              pluralize(@client.devices.debugging.size, "Position Debugging")
+            end
+         %>
+        </td>
+        <td><%= last_updated_date(@client.devices) %></td>
+        <td></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <div class="pt-2 text-center">
